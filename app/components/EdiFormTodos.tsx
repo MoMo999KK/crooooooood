@@ -45,7 +45,7 @@ const EdiFormTodos = ({todo}:Props) => {
      {todo?.isCOmpleted ? ( <form action={updateThisTodo}  >
    
    <input type="hidden" name="id"  defaultValue={todo?.id} id="id"      />
-   <input type="button" name="isCOmpleted"   defaultValue={todo?.isCOmpleted  }  id="isCOmpleted"      />
+   <input type="button" name="isCOmpleted"   defaultValue={todo?.isCOmpleted as any  }  id="isCOmpleted"      />
 
    <button type="submit" disabled={pending} className="ml-12"  >
      {pending ? "Submitting..." : "Submit"}
