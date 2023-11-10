@@ -4,8 +4,7 @@ import { AddForm } from './components/add-form'
 import   { DeleteForm } from './components/delet-form'
 import EditForm from './components/EditForm'
 import Link from 'next/link'
-import SearchComponent from './components/searchCOmponent'
-import Dropzone from './components/Dropzone'
+ 
 
 const Home = async() => {
   const allNames=await getNames()
