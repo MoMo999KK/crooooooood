@@ -1,46 +1,50 @@
-import AcmeLogo from '@/app/ui/acme-logo';
-import { Lusitana } from 'next/font/google';
+import React from 'react'
+import { getCountOnUsersAnd, getNames } from './actions'
+import { AddForm } from './components/add-form'
+import   { DeleteForm } from './components/delet-form'
+import EditForm from './components/EditForm'
+import Link from 'next/link'
+import SearchComponent from './components/searchCOmponent'
+import Dropzone from './components/Dropzone'
 
-import Link from 'next/link';
-import { lusitana } from './layout';
-export default function Page() {
+const Home = async() => {
+  const allNames=await getNames()
+  // showing the number of todos and the number of users at the same time!
+  const allData=await getCountOnUsersAnd()
+ 
+
+
+
+
+
+
   return (
-    <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-900 p-4 md:h-52">
-        {/* <AcmeLogo /> */}
+    <div className='flex w-4/6 mx-auto shadow-md bg-gray-400 rounded-md h-screen'>
+      <div className="ml-[300px]">
+          
       </div>
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-        <div
-  className="h-0 w-0 border-b-[30px] border-l-[20px] border-r-[20px] border-b-black border-l-transparent border-r-transparent"
-/>
-<p
-      className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}
-    >
-      <strong>Welcome to Acme.</strong> This is the example for the{' '}
-      <a href="https://nextjs.org/learn/" className="text-blue-500">
-        Next.js Learn Course
-      </a>
-      , brought to you by Vercel.
-    </p>
-          <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal`}>
-            <strong>Welcome to Acme.</strong> This is the example for the{' '}
-            <a href="https://nextjs.org/learn/" className="text-blue-500">
-              Next.js Learn Course
-            </a>
-            , brought to you by Vercel.
-          </p>
-          <Link
-            href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Log in</span>
-          </Link>
-        </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
-        </div>
+      <AddForm/>
+      <div className="">
+      
+      {
+        allNames.map((name)=>(
+          <div className="h-10 shadow-lg w-10 flex items-center gap-2" key={name.id}>
+           <Link href={`/names/${name.id}`}> <p>{name.name}</p></Link>
+            <DeleteForm id={name.id} />
+            <EditForm name={name}/>
+           </div>
+        ))
+      }
+    </div>
+      <hr />
+      <div className="mt-[200px] bg-red-400">
+        number of users:{allData?.[0]}
+        number of todos:{allData?.[1]}
+        number of categories:{allData?.[2]}
+
       </div>
-    </main>
-  );
+    </div>
+  )
 }
+
+export default Home
